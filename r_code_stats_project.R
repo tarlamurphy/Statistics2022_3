@@ -17,3 +17,5 @@
 polar <- read.csv("polar.csv", header = TRUE)
 head(polar)
 
+typeof(polar$Age)
+typeof(polar$Total_Length) #appears that the variables are all characters
