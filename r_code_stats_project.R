@@ -17,5 +17,9 @@
 polar <- read.csv("polar.csv", header = TRUE)
 head(polar)
 
-typeof(polar$Age)
+typeof(polar$Age) #result is character
 typeof(polar$Total_Length) #appears that the variables are all characters
+
+as.integer(polar$Age) # turn the variable from a character to an integer
+as.integer(polar$Total_Length)
+polar$Age # that didnt work - still a character
