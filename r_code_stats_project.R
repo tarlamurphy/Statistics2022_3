@@ -36,3 +36,4 @@ polar1 <- subset(polar, select = c("Collecting_Agency","Population", "BearID", "
 
 summary(polar1)
 # 3174 entries
+#hiiaa this is me
