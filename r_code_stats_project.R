@@ -36,4 +36,18 @@ polar1 <- subset(polar, select = c("Collecting_Agency","Population", "BearID", "
 
 summary(polar1)
 # 3174 entries
-#hiiaa this is me
+#hiiaa this is me, I found a way to change the datatype inside the original table, so you don't have to force it together afterwards
+typeof(polar$Age) # here you see it is still character
+polar$Age <- as.double(polar$Age)# turn the variable from a character to an integer
+polar$Total_Length <- as.double(polar$Total_Length) # must assign it to an object
+polar$Standard_Length <- as.double(polar$Standard_Length)
+polar$Mass <- as.double(polar$Mass)
+polar$Number_of_cubs <- as.double(polar$Number_of_cubs)
+polar$Heart_Girth <- as.double(polar$Heart_Girth)
+polar$Skull_Width <- as.double(polar$Skull_Width)
+
+# subset to remove excess columns
+polar1 <- subset(polar, select = c("Collecting_Agency","Population", "BearID", "Sex", "Age", "Total_Length", "Standard_Length",
+                                   "Heart_Girth", "Skull_Width", "Mass", "Number_of_cubs"))
+
+typeof(polar1$Heart_Girth) # here you see it stayed double
