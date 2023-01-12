@@ -51,3 +51,5 @@ polar1 <- subset(polar, select = c("Collecting_Agency","Population", "BearID", "
                                    "Heart_Girth", "Skull_Width", "Mass", "Number_of_cubs"))
 
 typeof(polar1$Heart_Girth) # here you see it stayed double
+
+glimpse(polar1) # we can check the types of all the variables to see if they are correct
