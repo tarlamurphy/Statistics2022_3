@@ -43,3 +43,14 @@ polar1 <- subset(polar, select = c("agency", "population", "bearID", "sex", "age
                                    "total_length", "standard_length", "mass", "cubs", "heart", "skull"))
 
 summary(polar1)
+
+
+### to do: 
+#  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
+#  - clean data: removing NAs, changing columns’ names and/or types, creating new columns, removing unnecessary columns, filtering observations, creating additional data frames/matrices/lists/vectors
+#  - do an EDA (explorative data analysis): calculate summary statistics of your variables and visualize their univariate and bivariate distributions
+#  - formulate at least an hypothesis and test it. You should comment the results of your test(s) and say if your hypothesis is supported or not by your data.
+
+### we have good data on heart
+
+
