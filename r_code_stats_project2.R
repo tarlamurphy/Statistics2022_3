@@ -44,15 +44,18 @@ polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "se
 
 summary(polar1)
 
-# how I tried to remove NAs
-drop_na(polar1, bearID)
-drop_na(polar1, age)
-drop_na(polar1, total_length, standard_length, mass, heart, skull)
-summary(polar1)
+# remove NAs
 
-polar1 %>%
-  filter(!is.na(bearID))
-summary(polar1)
+cubs_male30<- polar1$cubs %>% replace_na(30) # change male NAs to 30 in the cubs column (as they obviously do not birth cubs)
+
+polar2 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
+                                "total_length", "standard_length", "mass", "heart", "skull")) # create a new subset deleting the old cubs column
+polar3 <- cbind(polar2, cubs_male30) # add in the new column
+
+polar4 <- na.omit(polar3) # omit all NAs
+                         
+summary(polar4) # now all NAs are gone
+
 
 
 ### to do: 
