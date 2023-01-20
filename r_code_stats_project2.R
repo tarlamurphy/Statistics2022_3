@@ -44,6 +44,16 @@ polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "se
 
 summary(polar1)
 
+# how I tried to remove NAs
+drop_na(polar1, bearID)
+drop_na(polar1, age)
+drop_na(polar1, total_length, standard_length, mass, heart, skull)
+summary(polar1)
+
+polar1 %>%
+  filter(!is.na(bearID))
+summary(polar1)
+
 
 ### to do: 
 #  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
