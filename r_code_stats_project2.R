@@ -56,7 +56,15 @@ polar4 <- na.omit(polar3) # omit all NAs
                          
 summary(polar4) # now all NAs are gone
 
+#  simple graphs
 
+polar4 %>% 
+  ggplot() +
+  geom_histogram(aes(x = age, fill = sex), color = "black", alpha = 0.2)
+
+polar4 %>% 
+  ggplot() +
+  geom_density(aes(x = age, fill = sex), color = "black", alpha = 0.3)
 
 ### to do: 
 #  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
@@ -64,6 +72,14 @@ summary(polar4) # now all NAs are gone
 #  - do an EDA (explorative data analysis): calculate summary statistics of your variables and visualize their univariate and bivariate distributions
 #  - formulate at least an hypothesis and test it. You should comment the results of your test(s) and say if your hypothesis is supported or not by your data.
 
-### we have good data on heart
+### graphs: 
+# histogram of average number of accompanying cubs per mature female
+# what is the age of the females in correlation to their number of cubs
+# function of age and length: show growing phase
+# age distribution 
+# skull width correlation to sex
+# heart girth correlation to age and sex --> if we figure out how they measured the hearts
+# mass correlation with sex
+# 
 
 
