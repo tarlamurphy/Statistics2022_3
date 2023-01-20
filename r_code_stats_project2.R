@@ -39,7 +39,7 @@ rename(agency = Collecting_Agency , population = Population, bearID = BearID, se
          heart = as.double(heart), skull = as.double(skull))
 
 # create a subset of only the relevant columns
-polar1 <- subset(polar, select = c("agency", "population", "bearID", "sex", "age", 
+polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
                                    "total_length", "standard_length", "mass", "cubs", "heart", "skull"))
 
 summary(polar1)
