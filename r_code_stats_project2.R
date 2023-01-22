@@ -67,9 +67,18 @@ polar4 %>%
   geom_density(aes(x = age, fill = sex), color = "black", alpha = 0.3)
 
 # skull width correlation to sex
-> polar4 %>% 
-+     ggplot(aes(x = sex, y = skull)) +
-+     geom_boxplot()
+polar4 %>% 
+   ggplot(aes(x = sex, y = skull)) +
+   geom_boxplot()
+polar4 %>% 
+    ggplot() +
+    geom_boxplot(aes(x = sex, y = skull, colour = sex))
+ polar4 %>% 
+    ggplot() +
+    geom_boxplot(aes(x = sex, y = skull, fill = sex))
+ polar4 %>% 
+    ggplot() +
+    geom_boxplot(aes(x = sex, y = skull, color = sex, fill = sex))
 
 ### to do: 
 #  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
