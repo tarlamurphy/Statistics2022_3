@@ -58,13 +58,62 @@ summary(polar4) # now all NAs are gone
 
 #  simple graphs
 
-polar4 %>% 
-  ggplot() +
-  geom_histogram(aes(x = age, fill = sex), color = "black", alpha = 0.2)
+# simple graphs
 
+# density plot sex vs age
 polar4 %>% 
   ggplot() +
-  geom_density(aes(x = age, fill = sex), color = "black", alpha = 0.3)
+  geom_density(aes(x = age, fill = sex), color = "black", alpha = 0.3) +
+  labs(title = "Polarbear age distribution for females and males", 
+       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+       x = "Age", y = " Density", fill = "Sex") +
+  theme(panel.background = element_rect(fill = "white"))
+
+# density plot sex vs mass
+polar4 %>% 
+  ggplot() +
+  geom_density(aes(x = mass, fill = sex), color = "black", alpha = 0.3) + 
+  labs(title = "Polarbear mass distribution for females and males", 
+       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+       x = "Mass (in kg)", y = " Density", fill = "Sex") +
+  theme(panel.background = element_rect(fill = "white"))
+
+# density plot sex vs total length
+polar4 %>% 
+  ggplot() +
+  geom_density(aes(x = total_length, fill = sex), color = "black", alpha = 0.3) +
+  labs(title = "Polarbear length distribution for females and males", 
+       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+       x = "Total Length", y = " Density", fill = "Sex") +
+  theme(panel.background = element_rect(fill = "white"))
+
+# boxplot sex vs age
+polar4 %>% 
+  ggplot() +
+  geom_boxplot(aes(x = sex, y  = age)) +
+  labs(title = "Polarbear age distribution for females and males", 
+       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+       x = "Sex", y = "Age (in years)") +
+  theme(panel.background = element_rect(fill = "white"))
+
+# boxplot sex vs mass
+polar4 %>% 
+  ggplot() +
+  geom_boxplot(aes(x = sex, y  = mass)) +
+  labs(title = "Polarbear mass distribution for females and males", 
+       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+       x = "Sex", y = "Mass (in kg)") +
+  theme(panel.background = element_rect(fill = "white"))
+
+# boxplot sex vs total length
+polar4 %>% 
+  ggplot() +
+  geom_boxplot(aes(x = sex, y  = total_length)) +
+  labs(title = "Polarbear length distribution for females and males", 
+       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+       x = "Sex", y = "Length (in cm)") +
+  theme(panel.background = element_rect(fill = "white"))
+
 
 # skull width correlation to sex
 polar4 %>% 
