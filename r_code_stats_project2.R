@@ -128,7 +128,13 @@ polar4 %>%
  polar4 %>% 
     ggplot() +
     geom_boxplot(aes(x = sex, y = skull, color = sex, fill = sex))
-
+#geom_violin for sex corelating to total length but no numbers
+ polar4 %>% 
+       ggplot(aes(x = sex, y = total_length)) +
+       geom_violin()
+  polar4 %>% 
+       ggplot() +
+       geom_violin(aes(x = sex, y = total_length, color = sex, fill = sex))
 ### to do: 
 #  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
 #  - clean data: removing NAs, changing columns’ names and/or types, creating new columns, removing unnecessary columns, filtering observations, creating additional data frames/matrices/lists/vectors
