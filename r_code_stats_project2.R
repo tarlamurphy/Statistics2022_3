@@ -113,6 +113,13 @@ polar4 %>%
        subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
        x = "Sex", y = "Length (in cm)") +
   theme(panel.background = element_rect(fill = "white"))
+#geom_violin for sex corelating to total length but no numbers (better boxplot)
+ polar4 %>% 
+       ggplot(aes(x = sex, y = total_length)) +
+       geom_violin()
+  polar4 %>% 
+       ggplot() +
+       geom_violin(aes(x = sex, y = total_length, color = sex, fill = sex))
 
 
 # skull width correlation to sex
@@ -128,13 +135,21 @@ polar4 %>%
  polar4 %>% 
     ggplot() +
     geom_boxplot(aes(x = sex, y = skull, color = sex, fill = sex))
-#geom_violin for sex corelating to total length but no numbers
- polar4 %>% 
-       ggplot(aes(x = sex, y = total_length)) +
-       geom_violin()
-  polar4 %>% 
-       ggplot() +
-       geom_violin(aes(x = sex, y = total_length, color = sex, fill = sex))
+
+
+#density plot of age distribution in the whole population observed
+> polar4 %>% 
++     ggplot() +
++     geom_density(aes(x = age))
+
+#violin plot for age distirbution with males and with females
+> polar4 %>% 
++     ggplot() +
++     geom_density(aes(x = age))
+> polar4 %>% 
++     ggplot() +
++     geom_violin(aes(x = sex, y = age, color = sex, fill = sex))
+
 ### to do: 
 #  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
 #  - clean data: removing NAs, changing columns’ names and/or types, creating new columns, removing unnecessary columns, filtering observations, creating additional data frames/matrices/lists/vectors
