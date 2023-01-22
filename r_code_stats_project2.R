@@ -152,3 +152,10 @@ polar4 %>%
 # 
 
 
+# histogram of average number of accompanying cubs per mature female
+install.packages("naniar")
+library(naniar) # this package allows us to change values to nas
+
+polar5 <- (polar4$cubs_male30[polar4$cubs_male30==30] <- "NA") # 30s in the cubs column are replaced with NAs
+
+plot(polar4$cubs_male30)
