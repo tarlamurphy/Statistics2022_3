@@ -141,6 +141,10 @@ polar4 %>%
 > polar4 %>% 
 +     ggplot() +
 +     geom_density(aes(x = age))
+#bar plot for age distribution in the whole population observed (prettier)
+> polar4 %>% 
++     ggplot() +
++     geom_bar(aes(x = age))
 
 #violin plot for age distirbution with males and with females
 > polar4 %>% 
