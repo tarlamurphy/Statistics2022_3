@@ -66,6 +66,11 @@ polar4 %>%
   ggplot() +
   geom_density(aes(x = age, fill = sex), color = "black", alpha = 0.3)
 
+# skull width correlation to sex
+> polar4 %>% 
++     ggplot(aes(x = sex, y = skull)) +
++     geom_boxplot()
+
 ### to do: 
 #  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
 #  - clean data: removing NAs, changing columns’ names and/or types, creating new columns, removing unnecessary columns, filtering observations, creating additional data frames/matrices/lists/vectors
