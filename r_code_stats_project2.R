@@ -177,4 +177,18 @@ library(naniar) # this package allows us to change values to nas
 
 polar5 <- (polar4$cubs_male30[polar4$cubs_male30==30] <- "NA") # 30s in the cubs column are replaced with NAs
 
-plot(polar4$cubs_male30)
+# histogram of average number of accompanying cubs per mature female
+install.packages("naniar")
+library(naniar) # this package allows us to change values to nas
+
+polar5 <- (polar4$cubs_male30[polar4$cubs_male30==30] <- "NA") # set the 30s as NAs
+
+library(dplyr) # needed for filtering
+
+polar5 <- polar4 %>% 
+  select(bearID, cubs_male30, age, total_length, standard_length, mass, heart, skull) %>%
+  filter(cubs_male30 != "NA") # filter out the NAs so we only have rows for mature females
+
+colnames(polar5)[2] <- "cubs" # change the column names for cubs
+
+
