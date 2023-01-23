@@ -24,8 +24,17 @@ polar <- read.csv("polarbear_data/CS_SB_PBearMeasurementData_1981_2017.csv", hea
 
 # take a first look at the dataset
 glimpse(polar)
-# originally data contains x variables and x observations
-# what are the variables about?
+# originally the data contained 22 columns,of which a few held no data however, in 3174 rows
+# the variables showed measured data of captured polarbears, including the collecting agency, 
+# the population group, 
+# the date of capture, 
+# the BearID, 
+# the bears sex, age, length (standard and total),
+# the bears heart girth, skull width, tail length, mass, 
+# a score that represents their physical condition
+# the number of cubs that accompanied them, the cubs age
+# the bears gut fill, litter mass
+# their fat amount, gut fill, snout length, resistence, body fat percentage (but all these contained no data)
 
 # rename columns and change necessary data types
 polar <- polar %>% 
@@ -42,19 +51,30 @@ rename(agency = Collecting_Agency , population = Population, bearID = BearID, se
 polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
                                    "total_length", "standard_length", "mass", "cubs", "heart", "skull"))
 
+# show a summary to see where NAs can be found in the dataset
+# as well as look at some statistical parameters, including minimum value, 1st quantile, median, mean, 3rd quantile and maximum value
 summary(polar1)
 
+# further calculate variance, standard deviation and range of the relevant columns
+var(polar1[,6:12], na.rm = TRUE)
+sd(polar1[,6:12], na.rm = TRUE)
+range(polar1[,6:12], na.rm = TRUE) ##### not sure if this works, or is even relevant
+
 # remove NAs
+# however the NAs in the cub column cannot simply be removed, as no cubs accompany male bears our young (immature) females
+cubs_male30<- polar1$cubs %>% replace_na(30) # change male/young female NAs to 30 in the cubs column 
+# (as this value is unrealistic and cannot be mistaken with any real cub count)
 
-cubs_male30<- polar1$cubs %>% replace_na(30) # change male NAs to 30 in the cubs column (as they obviously do not birth cubs)
-
+# now subset the columns without the old cubs column
 polar2 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
-                                "total_length", "standard_length", "mass", "heart", "skull")) # create a new subset deleting the old cubs column
-polar3 <- cbind(polar2, cubs_male30) # add in the new column
+                                "total_length", "standard_length", "mass", "heart", "skull"))
+ # add in the new column with the NAs changed to 30
+polar3 <- cbind(polar2, cubs_male30)
 
-polar4 <- na.omit(polar3) # omit all NAs
-                         
-summary(polar4) # now all NAs are gone
+# now omit all NAs in the dataset
+polar4 <- na.omit(polar3) 
+
+
 
 ### to do: 
 #  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
