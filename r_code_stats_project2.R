@@ -3,13 +3,15 @@
 ## Global Change Ecology and Sustainable Development Goals
 ## Tarla Murphy, Lola Neuert, Emilija Zubac
 
-# Measurement data of polar bears captured in the Chukchi
-# and Southern Beaufort seas, 1981 - 2017
+# Measurement data of polar bears captured in the Chukchi and Southern Beaufort seas, 1981 - 2017
 
 ### Data
 # Data is available from the Alaska Science Center at https://alaska.usgs.gov/products/data.php?dataid=315
 # alternatively from data.world at https://data.world/us-doi-gov/581f789d-efa1-45db-a542-4812bed49004
 # Data is made available by the Department of the Interior, US Government
+# information on the methods used during capture and measurement can be found at 
+# Rode, K.D., 2020, Measurement data of Polar Bears captured in the Chukchi and southern Beaufort Seas, 1981-2017
+# U.S. Geological Survey data release, https://doi.org/10.5066/P9TVK3PX.
 
 ### Data Upload
 # set working directory, eg. setwd("~/R_Stats")
@@ -24,15 +26,14 @@ polar <- read.csv("polarbear_data/CS_SB_PBearMeasurementData_1981_2017.csv", hea
 
 # take a first look at the dataset
 glimpse(polar)
+
 # originally the data contained 22 columns,of which a few held no data however, in 3174 rows
-# the variables showed measured data of captured polarbears, including the collecting agency, 
-# the population group, 
-# the date of capture, 
-# the BearID, some 
+# the variables showed measurements of captured polarbears, including the collecting agency, 
+# the population group, the date of capture, the BearID (some of the bears were captured multiple times througout the years),
 # the bears sex, age, length (standard and total),
 # the bears heart girth, skull width, tail length, mass, 
 # a score that represents their physical condition
-# the number of cubs that accompanied them, the cubs age
+# the number of cubs that accompanied them when they were captured, the cubs age
 # the bears gut fill, litter mass
 # their fat amount, gut fill, snout length, resistence, body fat percentage (but all these contained no data)
 
