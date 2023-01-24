@@ -55,9 +55,13 @@ polar <- polar %>%
 polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
                                    "total_length", "standard_length", "mass", "cubs", "heart", "skull"))
 
-### EDA: show a summary to see where NAs can be found in the dataset
+### EDA: look to see where NAs can be found in the dataset
 # as well as look at some statistical parameters, including minimum value, 1st quantile, median, mean, 3rd quantile and maximum value
 summary(polar1)
+
+# we look at the first and last few lines of the dataset to see if everything is cohesive
+head(polar1) 
+tail(polar1)
 
 # remove NAs
 # however the NAs in the cub column cannot simply be removed, as no cubs accompany male bears our young (immature) females
@@ -72,6 +76,12 @@ polar3 <- cbind(polar2, cubs_male30)
 
 # now omit all NAs in the dataset
 polar4 <- na.omit(polar3) 
+
+# we looked at some further parameters for some interesting variables
+range(polar4$mass)
+var(polar4$mass)
+range(polar4$total_length)
+var(polar4$total_length)
 
 # cleaning data for average number of accompanying cubs per mature female
 
