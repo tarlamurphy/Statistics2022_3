@@ -178,6 +178,8 @@ scatter_hyp1 <- ggplot(data = polar4) +
        subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
        x = "Total Length (in cm)", y = "Mass (in kg)") +
   theme(panel.background = element_rect(fill = "white"))
+  
+  scatter_hyp1
 
 # our second hypothesis tries to correlate the number of cubs in mature female polarbears with their mass
 # H0 is stated as: there is no positive correlation between number of cubs and mass 
@@ -197,3 +199,5 @@ scatter_hyp2 <- ggplot(data = polar5) +
        subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
        x = "Number of cubs", y = "Mass (in kg)") +
   theme(panel.background = element_rect(fill = "white"))
+
+scatter_hyp2
