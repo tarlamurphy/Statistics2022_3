@@ -72,6 +72,17 @@ polar3 <- cbind(polar2, cubs_male30)
 # now omit all NAs in the dataset
 polar4 <- na.omit(polar3) 
 
+# cleaning data for average number of accompanying cubs per mature female
+
+polar5 <- (polar4$cubs_male30[polar4$cubs_male30==30] <- "NA") # 30s in the cubs column are replaced with NAs
+
+polar5 <- polar4 %>% 
+  select(bearID, cubs_male30, age, total_length, standard_length, mass, heart, skull) %>%
+  filter(cubs_male30 != "NA") # filter out the NAs so we only have rows for mature females
+
+colnames(polar5)[2] <- "cubs" # change the column names for cubs
+polar5 <- polar5 %>% mutate(cubs = as.integer(cubs))
+
 ### graphs
 ## some simple graphs: density distributions and boxplots of bivariate data (impact of sex on age, mass and length)
 
@@ -147,16 +158,6 @@ polar4 %>%
        x = "Sex", y = "Age (in years") + 
   theme(panel.background = element_rect(fill = "white"))
 
-# histogram of average number of accompanying cubs per mature female
-
-polar5 <- (polar4$cubs_male30[polar4$cubs_male30==30] <- "NA") # 30s in the cubs column are replaced with NAs
-
-polar5 <- polar4 %>% 
-  select(bearID, cubs_male30, age, total_length, standard_length, mass, heart, skull) %>%
-  filter(cubs_male30 != "NA") # filter out the NAs so we only have rows for mature females
-
-colnames(polar5)[2] <- "cubs" # change the column names for cubs
-polar5 <- polar5 %>% mutate(cubs = as.integer(cubs))
 
 ### hypothesis
 # our first hypothesis concerns the correlation between Total length of Polarbears and their Mass
