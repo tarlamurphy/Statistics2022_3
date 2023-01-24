@@ -27,11 +27,12 @@ polar <- read.csv("polar.csv", header = TRUE)
 
 # take a first look at the dataset
 glimpse(polar)
+
 # originally the data contained 22 columns,of which a few held no data however, in 3174 rows
 # the variables showed measured data of captured polarbears, including the collecting agency, 
 # the population group, 
 # the date of capture, 
-# the BearID, 
+# the BearID (some bears were captured multiple times throughout their life over the years),
 # the bears sex, age, length (standard and total),
 # the bears heart girth, skull width, tail length, mass, 
 # a score that represents their physical condition
@@ -76,11 +77,13 @@ polar4 <- na.omit(polar3)
 
 polar4$cubs_male30[polar4$cubs_male30==30] <- "NA" # 30s in the cubs column are replaced with NAs
 
+# again subset the relevant columns for the mature female dataset
 polar5 <- polar4 %>% 
   select(bearID, cubs_male30, age, total_length, standard_length, mass, heart, skull) %>%
   filter(cubs_male30 != "NA") # filter out the NAs so we only have rows for mature females
 
-colnames(polar5)[2] <- "cubs" # change the column names for cubs
+# change the column names for cubs and mutate them to be integer
+colnames(polar5)[2] <- "cubs" 
 polar5 <- polar5 %>% mutate(cubs = as.integer(cubs))
 
 ### graphs
@@ -131,8 +134,10 @@ box_length <- polar4 %>%
   theme(panel.background = element_rect(fill = "white"))
 
 # now add all these graphs in one big frame using the package patchwork for better overview and comparison
-dens_age + dens_mass + dens_length +
+dens_box_sex <- dens_age + dens_mass + dens_length +
   box_age + box_mass + box_length
+  
+ ggsave(filename = "density_boxplots_sex.png", plot = dens_box_sex, width = 10, height = 10)
 
 # plot showing skull width correlation to sex
 box_skull <- polar4 %>% 
@@ -159,9 +164,12 @@ violin_age <- polar4 %>%
   theme(panel.background = element_rect(fill = "white"))
 
 box_skull + bar_age + violin_age # patchwork of these three plots
+ggsave(filename = "boxplot_skull.png", plot = box_skull, width = 10, height = 10)
+ggsave(filename = "barplot_age.png", plot = bar_age, width = 10, height = 10)
+ggsave(filename = "violinplot_age.png", plot = violing_age, width = 10, height = 10)
 
 # polar cubs graphs: does number of cubs correspond to age, mass or length of mothers?
-polar5 <- polar5 %>% mutate(cubs = as.character(cubs)) # change cub variable back to characters for it to display more easily
+polar6 <- polar5 %>% mutate(cubs = as.character(cubs)) # change cub variable back to characters for it to display more easily in graphs
 
 cubs_age <- ggplot(data = polar5) +
   geom_boxplot(aes(x = cubs, y = age)) + 
@@ -183,6 +191,8 @@ cubs_length <- ggplot(data = polar5) +
 
 cubs_age + cubs_mass + cubs_length
 
+ggsave(filename = "cubs_plots.png", plot = cubs_plots, width = 10, height = 10)
+
 ### hypothesis
 # our first hypothesis concerns the correlation between Total length of Polarbears and their Mass
 # H0 is stated as: Total length and Mass are not positively correlated,
@@ -203,6 +213,7 @@ scatter_hyp1 <- ggplot(data = polar4) +
   theme(panel.background = element_rect(fill = "white"))
   
   scatter_hyp1
+  ggsave(filename = "scatterplot_hyp1.png", plot = scatter_hyp1, width = 10, height = 10)
 
 # our second hypothesis tries to correlate the number of cubs in mature female polarbears with their mass, 
 # as we saw a decreasing trend in the graphs above
@@ -225,3 +236,4 @@ scatter_hyp2 <- ggplot(data = polar5) +
   theme(panel.background = element_rect(fill = "white"))
 
 scatter_hyp2
+ggsave(filename = "scatterplot_hyp2.png", plot = scatter_hyp2, width = 10, height = 10)
