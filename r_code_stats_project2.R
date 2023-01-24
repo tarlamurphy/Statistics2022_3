@@ -52,7 +52,7 @@ rename(agency = Collecting_Agency , population = Population, bearID = BearID, se
 polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
                                    "total_length", "standard_length", "mass", "cubs", "heart", "skull"))
 
-# show a summary to see where NAs can be found in the dataset
+## EDA: show a summary to see where NAs can be found in the dataset
 # as well as look at some statistical parameters, including minimum value, 1st quantile, median, mean, 3rd quantile and maximum value
 summary(polar1)
 
@@ -70,23 +70,7 @@ polar3 <- cbind(polar2, cubs_male30)
 # now omit all NAs in the dataset
 polar4 <- na.omit(polar3) 
 
-
-### to do: 
-#  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
-#  - clean data: removing NAs, changing columns’ names and/or types, creating new columns, removing unnecessary columns, filtering observations, creating additional data frames/matrices/lists/vectors
-#  - do an EDA (explorative data analysis): calculate summary statistics of your variables and visualize their univariate and bivariate distributions
-#  - formulate at least an hypothesis and test it. You should comment the results of your test(s) and say if your hypothesis is supported or not by your data.
-
-### graphs ?
-# histogram of average number of accompanying cubs per mature female
-# what is the age of the females in correlation to their number of cubs
-# function of age and length: show growing phase
-# age distribution 
-# skull width correlation to sex
-# heart girth correlation to age and sex --> if we figure out how they measured the hearts
-# mass correlation with sex
-
-#  simple graphs
+## some simple graphs: density distributions and boxplots of bivariate data (impact of sex on age, mass and length)
   
 dens_age <- polar4 %>% 
   ggplot() +
