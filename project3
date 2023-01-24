@@ -15,9 +15,10 @@
 # set working directory, eg. setwd("~/R_Stats")
 
 # load requiring packages
-library(ggplot2)
-library(tidyverse)
-library(GGally)
+library(ggplot2) # create aesthetic graphs
+library(tidyverse) # used to make a tidy dataset to work with
+library(GGally) # extension of ggplot
+library(patchwork) # patch plots together easily
 library(naniar) # this package allows us to change values to NAs
 library(dplyr) # needed for filtering
 
@@ -53,47 +54,9 @@ polar <- polar %>%
 polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
                                    "total_length", "standard_length", "mass", "cubs", "heart", "skull"))
 
-# show a summary to see where NAs can be found in the dataset
+# EDA: show a summary to see where NAs can be found in the dataset
 # as well as look at some statistical parameters, including minimum value, 1st quantile, median, mean, 3rd quantile and maximum value
 summary(polar1)
-
-# further calculate variance, standard deviation and range of the relevant columns
-variance <- function(x){
-  var(x, na.rm = TRUE)
-}
-
-variance(polar4$age)
-variance(polar4$total_length)
-variance(polar4$standard_length)
-variance(polar4$mass)
-variance(polar4$cubs)
-variance(polar4$heart)
-variance(polar4$skull)
-
-standdev <- function(x){
-  sd(x, na.rm = TRUE)
-}
-
-standdev(polar4$age)
-standdev(polar4$total_length)
-standdev(polar4$standard_length)
-standdev(polar4$mass)
-standdev(polar4$cubs)
-standdev(polar4$heart)
-standdev(polar4$skull)
-
-rangefunc <- function(x){
-  range(x, na.rm = TRUE)
-}
-
-rangefunc(polar4$age)
-rangefunc(polar4$total_length)
-rangefunc(polar4$standard_length)
-rangefunc(polar4$mass)
-rangefunc(polar4$cubs)
-rangefunc(polar4$heart)
-rangefunc(polar4$skull)
-##### don't think this is even relevant, i was just having fun with functions hihi
 
 # remove NAs
 # however the NAs in the cub column cannot simply be removed, as no cubs accompany male bears our young (immature) females
@@ -109,25 +72,7 @@ polar3 <- cbind(polar2, cubs_male30)
 # now omit all NAs in the dataset
 polar4 <- na.omit(polar3) 
 
-
-
-### to do: 
-#  - comment on data: what is the data set about and where does it come from? How many observations and variables are there? Which are the names and types of your variables? What do they represent? 
-#  - clean data: removing NAs, changing columns’ names and/or types, creating new columns, removing unnecessary columns, filtering observations, creating additional data frames/matrices/lists/vectors
-#  - do an EDA (explorative data analysis): calculate summary statistics of your variables and visualize their univariate and bivariate distributions
-#  - formulate at least an hypothesis and test it. You should comment the results of your test(s) and say if your hypothesis is supported or not by your data.
-
-### graphs ?
-# histogram of average number of accompanying cubs per mature female
-# what is the age of the females in correlation to their number of cubs
-# function of age and length: show growing phase
-# age distribution 
-# skull width correlation to sex
-# heart girth correlation to age and sex --> if we figure out how they measured the hearts
-# mass correlation with sex
-
-
-
+## some simple graphs: density distributions and boxplots of bivariate data (impact of sex on age, mass and length)
 dens_age <- polar4 %>% 
   ggplot() +
   geom_density(aes(x = age, fill = sex), color = "black", alpha = 0.3) +
@@ -223,12 +168,8 @@ polar4 %>%
 
 
 # histogram of average number of accompanying cubs per mature female
-install.packages("naniar")
-library(naniar) # this package allows us to change values to nas
 
 polar5 <- (polar4$cubs_male30[polar4$cubs_male30==30] <- "NA") # 30s in the cubs column are replaced with NAs
-
-library(dplyr) # needed for filtering
 
 polar5 <- polar4 %>% 
   select(bearID, cubs_male30, age, total_length, standard_length, mass, heart, skull) %>%
