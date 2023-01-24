@@ -165,6 +165,14 @@ bar_age <- polar4 %>%
        x = "Age (in years)", y = "Number of polarbears") + 
   theme(panel.background = element_rect(fill = "white"))
 
+# bar plot for mass distribution in the whole population observed - univariate variable
+bar_mass <- polar4 %>% 
+  ggplot() +
+  geom_bar(aes(x = mass))+
+  labs(title = "Mass distribution of all captured polarbears",
+       x = "Mass (in kg)", y = "Number of polarbears") + 
+  theme(panel.background = element_rect(fill = "white"))
+  
 # violin plot for age distirbution with males and females
 violin_age <- polar4 %>% 
   ggplot() +
@@ -173,9 +181,10 @@ violin_age <- polar4 %>%
        x = "Sex", y = "Age (in years") + 
   theme(panel.background = element_rect(fill = "white"))
 
-box_skull + bar_age + violin_age # patchwork of these three plots
+box_skull + bar_age + bar_mass + violin_age # patchwork of these three plots
 ggsave(filename = "boxplot_skull.png", plot = box_skull, width = 10, height = 10)
 ggsave(filename = "barplot_age.png", plot = bar_age, width = 10, height = 10)
+ggsave(filename = "barplot_mass.png", plot = bar_mass, width = 10, height = 10)
 ggsave(filename = "violinplot_age.png", plot = violing_age, width = 10, height = 10)
 
 # polar cubs graphs: does number of cubs correspond to age, mass or length of mothers?
@@ -213,7 +222,7 @@ cor.test(polar4$total_length, polar4$mass, alternative = "greater")
 # the correlation value is 0.86, showing a strong positive correlation between length and mass of polarbears
 # this means we can reject H0 and accept H1
 
-# create plot to show correlation, with geom_smooth adding the correlation as a linear model??
+# create plot to show correlation, with geom_smooth adding the correlation as a line for visualization
 scatter_hyp1 <- ggplot(data = polar4) + 
   geom_point(aes(x = total_length, y = mass), alpha = 0.3) + 
   geom_smooth(aes(x = total_length, y = mass), method = "lm") +
