@@ -54,7 +54,7 @@ polar <- polar %>%
 polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "sex", "age", 
                                    "total_length", "standard_length", "mass", "cubs", "heart", "skull"))
 
-# EDA: show a summary to see where NAs can be found in the dataset
+### EDA: show a summary to see where NAs can be found in the dataset
 # as well as look at some statistical parameters, including minimum value, 1st quantile, median, mean, 3rd quantile and maximum value
 summary(polar1)
 
@@ -72,81 +72,64 @@ polar3 <- cbind(polar2, cubs_male30)
 # now omit all NAs in the dataset
 polar4 <- na.omit(polar3) 
 
+### graphs
 ## some simple graphs: density distributions and boxplots of bivariate data (impact of sex on age, mass and length)
+
 dens_age <- polar4 %>% 
   ggplot() +
   geom_density(aes(x = age, fill = sex), color = "black", alpha = 0.3) +
-  labs(title = "Polarbear age distribution for females & males", 
-       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
-       x = "Age", y = " Density", fill = "Sex") +
+  labs(title = "Age distribution for females & males", 
+       subtitle =  "1981 - 2017", 
+       x = "Age (in years)", y = "Density", fill = "Sex") +
   theme(panel.background = element_rect(fill = "white"))
 
 dens_mass <- polar4 %>% 
   ggplot() +
   geom_density(aes(x = mass, fill = sex), color = "black", alpha = 0.3) + 
-  labs(title = "Polarbear mass distribution for females & males", 
-       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
-       x = "Mass (in kg)", y = " Density", fill = "Sex") +
+  labs(title = "Mass distribution", 
+       x = "Mass (in kg)", y = "Density", fill = "Sex") +
   theme(panel.background = element_rect(fill = "white"))
 
 dens_length <- polar4 %>% 
   ggplot() +
   geom_density(aes(x = total_length, fill = sex), color = "black", alpha = 0.3) +
-  labs(title = "Polarbear length distribution for females and males", 
-       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
-       x = "Total Length (in cm)", y = " Density", fill = "Sex") +
+  labs(title = "Length distribution",  
+       x = "Total Length (in cm)", y = "Density", fill = "Sex") +
   theme(panel.background = element_rect(fill = "white"))
 
 box_age <- polar4 %>% 
   ggplot() +
   geom_boxplot(aes(x = sex, y  = age)) +
-  labs(title = "Polarbear age distribution for females and males", 
-       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+  labs(title = "Age distribution for females and males", 
+       subtitle = "1981 - 2017",
        x = "Sex", y = "Age (in years)") +
   theme(panel.background = element_rect(fill = "white"))
 
 box_mass <- polar4 %>% 
   ggplot() +
   geom_boxplot(aes(x = sex, y  = mass)) +
-  labs(title = "Polarbear mass distribution for females and males", 
-       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+  labs(title = "Mass distribution", 
        x = "Sex", y = "Mass (in kg)") +
   theme(panel.background = element_rect(fill = "white"))
 
 box_length <- polar4 %>% 
   ggplot() +
   geom_boxplot(aes(x = sex, y  = total_length)) +
-  labs(title = "Polarbear length distribution for females and males", 
-       subtitle = "Measurements from Chukchi and Southern Beaufort seas, 1981 - 2017", 
+  labs(title = "Length distribution",  
        x = "Sex", y = "Length (in cm)") +
   theme(panel.background = element_rect(fill = "white"))
 
-#  simple graphs
+# now add all these graphs in one big frame using the package patchwork for better overview and comparison
 dens_age + dens_mass + dens_length +
   box_age + box_mass + box_length
 
-#geom_violin for sex correlating to total length but no numbers (better boxplot)
-polar4 %>% 
-  ggplot(aes(x = sex, y = total_length)) +
-  geom_violin()
+# plot showing skull width correlation to sex
 polar4 %>% 
   ggplot() +
-  geom_violin(aes(x = sex, y = total_length, color = sex, fill = sex))
-
-
-# skull width correlation to sex
-polar4 %>% 
-  ggplot(aes(x = sex, y = skull)) +
-  geom_boxplot()
-polar4 %>% 
-  ggplot() +
-  geom_boxplot(aes(x = sex, y = skull, colour = sex))
-polar4 %>% 
-  ggplot() +
-  geom_boxplot(aes(x = sex, y = skull, fill = sex))
-polar4 %>% 
-  ggplot() +
-  geom_boxplot(aes(x = sex, y = skull, color = sex, fill = sex))
+  geom_boxplot(aes(x = sex, y = skull, fill = sex)) +
+                 labs(title = "Skull width correlation to sex",
+                      x = "Sex", y = "Skull width (in cm)") + 
+                 theme(panel.background = element_rect(fill = "white"))
 
 
 #density plot of age distribution in the whole population observed
@@ -177,8 +160,8 @@ polar5 <- polar4 %>%
 
 colnames(polar5)[2] <- "cubs" # change the column names for cubs
 polar5 <- polar5 %>% mutate(cubs = as.integer(cubs))
-# create hypothesis
 
+### hypothesis
 # our first hypothesis concerns the correlation between Total length of Polarbears and their Mass
 # H0 is stated as: Total length and Mass are not positively correlated,
 # and H1 is stated as: Total length and Mass are positively correlated
