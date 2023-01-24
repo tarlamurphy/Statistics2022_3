@@ -160,6 +160,30 @@ violin_age <- polar4 %>%
 
 box_skull + bar_age + violin_age # patchwork of these three plots
 
+# polar cubs graphs: does number of cubs correspond to age, mass or length of mothers?
+polar5 <- polar5 %>% mutate(cubs = as.character(cubs)) # change cub variable back to characters for it to display more easily
+
+cubs_age <- ggplot(data = polar5) +
+  geom_boxplot(aes(x = cubs, y = age)) + 
+  labs(title = "Cub count per age of mother",
+    x = "Number of cubs", y = "Age (in years)") + 
+  theme(panel.background = element_rect(fill = "white"))
+
+
+cubs_mass <- ggplot(data = polar5) +
+  geom_boxplot(aes(x = cubs, y = mass)) +
+  labs(title = "Cub count per mass of mother",
+       x = "Number of cubs", y = "Mass (in kg)") + 
+  theme(panel.background = element_rect(fill = "white"))
+
+cubs_length <- ggplot(data = polar5) +
+  geom_boxplot(aes(x = cubs, y = total_length)) +
+  labs(title = "Cub count per length of mother",
+     x = "Number of cubs", y = "Length (in cm)") + 
+  theme(panel.background = element_rect(fill = "white"))
+
+cubs_age + cubs_mass + cubs_length
+
 ### hypothesis
 # our first hypothesis concerns the correlation between Total length of Polarbears and their Mass
 # H0 is stated as: Total length and Mass are not positively correlated,
