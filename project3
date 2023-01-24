@@ -131,8 +131,7 @@ polar4 %>%
                       x = "Sex", y = "Skull width (in cm)") + 
                  theme(panel.background = element_rect(fill = "white"))
 
-
-# bar plot for age distribution in the whole population observed
+# bar plot for age distribution in the whole population observed - unvariate variable
 polar4 %>% 
   ggplot() +
   geom_bar(aes(x = age))+
@@ -140,7 +139,7 @@ polar4 %>%
        x = "Age (in years)", y = "Number of polarbears") + 
   theme(panel.background = element_rect(fill = "white"))
 
-# violin plot for age distirbution with males and  females
+# violin plot for age distirbution with males and females
 polar4 %>% 
   ggplot() +
   geom_violin(aes(x = sex, y = age, color = sex, fill = sex)) +
