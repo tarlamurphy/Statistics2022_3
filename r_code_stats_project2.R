@@ -28,7 +28,7 @@ glimpse(polar)
 # the variables showed measured data of captured polarbears, including the collecting agency, 
 # the population group, 
 # the date of capture, 
-# the BearID, 
+# the BearID, some 
 # the bears sex, age, length (standard and total),
 # the bears heart girth, skull width, tail length, mass, 
 # a score that represents their physical condition
@@ -54,44 +54,6 @@ polar1 <- subset(polar, select = c("agency", "population", "Date", "bearID", "se
 # show a summary to see where NAs can be found in the dataset
 # as well as look at some statistical parameters, including minimum value, 1st quantile, median, mean, 3rd quantile and maximum value
 summary(polar1)
-
-# further calculate variance, standard deviation and range of the relevant columns
-variance <- function(x){
-  var(x, na.rm = TRUE)
-}
-
-variance(polar4$age)
-variance(polar4$total_length)
-variance(polar4$standard_length)
-variance(polar4$mass)
-variance(polar4$cubs)
-variance(polar4$heart)
-variance(polar4$skull)
-
-standdev <- function(x){
-  sd(x, na.rm = TRUE)
-}
-
-standdev(polar4$age)
-standdev(polar4$total_length)
-standdev(polar4$standard_length)
-standdev(polar4$mass)
-standdev(polar4$cubs)
-standdev(polar4$heart)
-standdev(polar4$skull)
-
-rangefunc <- function(x){
-  range(x, na.rm = TRUE)
-}
-
-rangefunc(polar4$age)
-rangefunc(polar4$total_length)
-rangefunc(polar4$standard_length)
-rangefunc(polar4$mass)
-rangefunc(polar4$cubs)
-rangefunc(polar4$heart)
-rangefunc(polar4$skull)
-##### don't think this is even relevant, i was just having fun with functions hihi
 
 # remove NAs
 # however the NAs in the cub column cannot simply be removed, as no cubs accompany male bears our young (immature) females
