@@ -170,7 +170,7 @@ cor.test(polar4$total_length, polar4$mass, alternative = "greater")
 # this means we can reject H0 and accept H1
 
 # create plot to show correlation, with geom_smooth adding the correlation as a linear model??
-ggplot(data = polar4) + 
+scatter_hyp1 <- ggplot(data = polar4) + 
   geom_point(aes(x = total_length, y = mass), alpha = 0.3) + 
   geom_smooth(aes(x = total_length, y = mass), method = "lm") +
   labs(title = "Polarbear length and mass correlation", 
@@ -189,7 +189,7 @@ cor.test(polar5$cubs, polar5$mass, alternative = "greater")
 # we therefore can neither reject nor accept H1
 
 # now we create a plot that shows the non-significant correlation
-ggplot(data = polar5) + 
+scatter_hyp2 <- ggplot(data = polar5) + 
   geom_point(aes(x = cubs, y = mass), alpha = 0.3) + 
   geom_smooth(aes(x = cubs, y = mass), method = "lm") +
   labs(title = "Mature female Polarbears: correlation of number of cubs and mass", 
