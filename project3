@@ -169,7 +169,6 @@ cubs_age <- ggplot(data = polar5) +
     x = "Number of cubs", y = "Age (in years)") + 
   theme(panel.background = element_rect(fill = "white"))
 
-
 cubs_mass <- ggplot(data = polar5) +
   geom_boxplot(aes(x = cubs, y = mass)) +
   labs(title = "Cub count per mass of mother",
@@ -205,11 +204,12 @@ scatter_hyp1 <- ggplot(data = polar4) +
   
   scatter_hyp1
 
-# our second hypothesis tries to correlate the number of cubs in mature female polarbears with their mass
-# H0 is stated as: there is no positive correlation between number of cubs and mass 
-# H1 is stated as: there is a positive correlation between number of cubs and mass
+# our second hypothesis tries to correlate the number of cubs in mature female polarbears with their mass, 
+# as we saw a decreasing trend in the graphs above
+# H0 is stated as: there is no negative correlation between number of cubs and mass 
+# H1 is stated as: there is a negative correlation between number of cubs and mass
 # we again use function cor.test
-cor.test(polar5$cubs, polar5$mass, alternative = "greater")
+cor.test(polar5$cubs, polar5$mass, alternative = "less")
 # this time the Pearson's correlation gave a p-value of 0.9
 # as this is not smaller than 0.05, the test of correlation was not significant
 # the correlation comes out to be -0.16
