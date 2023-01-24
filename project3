@@ -138,15 +138,15 @@ dens_age + dens_mass + dens_length +
 box_skull <- polar4 %>% 
   ggplot() +
   geom_boxplot(aes(x = sex, y = skull, fill = sex)) +
-                 labs(title = "Skull width correlation to sex",
-                      x = "Sex", y = "Skull width (in cm)") + 
-                 theme(panel.background = element_rect(fill = "white"))
+  labs(title = "Skull width correlation to sex",
+       x = "Sex", y = "Skull width (in cm)") + 
+  theme(panel.background = element_rect(fill = "white"))
 
 # bar plot for age distribution in the whole population observed - unvariate variable
 bar_age <- polar4 %>% 
   ggplot() +
   geom_bar(aes(x = age))+
-  labs(title = "Age distribution of all captured polarbears",
+  labs(title = "Age distribution of all polarbears",
        x = "Age (in years)", y = "Number of polarbears") + 
   theme(panel.background = element_rect(fill = "white"))
 
@@ -158,6 +158,7 @@ violin_age <- polar4 %>%
        x = "Sex", y = "Age (in years") + 
   theme(panel.background = element_rect(fill = "white"))
 
+box_skull + bar_age + violin_age # patchwork of these three plots
 
 ### hypothesis
 # our first hypothesis concerns the correlation between Total length of Polarbears and their Mass
