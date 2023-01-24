@@ -132,23 +132,21 @@ polar4 %>%
                  theme(panel.background = element_rect(fill = "white"))
 
 
-#density plot of age distribution in the whole population observed
-> polar4 %>% 
-  +     ggplot() +
-  +     geom_density(aes(x = age))
-#bar plot for age distribution in the whole population observed (prettier)
-> polar4 %>% 
-  +     ggplot() +
-  +     geom_bar(aes(x = age))
+# bar plot for age distribution in the whole population observed
+polar4 %>% 
+  ggplot() +
+  geom_bar(aes(x = age))+
+  labs(title = "Age distribution of all captured polarbears",
+       x = "Age (in years)", y = "Number of polarbears") + 
+  theme(panel.background = element_rect(fill = "white"))
 
-#violin plot for age distirbution with males and with females
-> polar4 %>% 
-  +     ggplot() +
-  +     geom_density(aes(x = age))
-> polar4 %>% 
-  +     ggplot() +
-  +     geom_violin(aes(x = sex, y = age, color = sex, fill = sex))
-
+# violin plot for age distirbution with males and  females
+polar4 %>% 
+  ggplot() +
+  geom_violin(aes(x = sex, y = age, color = sex, fill = sex)) +
+  labs(title = "Age distribution of females and males",
+       x = "Sex", y = "Age (in years") + 
+  theme(panel.background = element_rect(fill = "white"))
 
 # histogram of average number of accompanying cubs per mature female
 
