@@ -22,7 +22,7 @@ library(tidyverse)
 library(GGally)
 
 # load the dataset
-polar <- read.csv("polarbear_data/CS_SB_PBearMeasurementData_1981_2017.csv", header = TRUE)
+polar <- read.csv("data/polar.csv", header = TRUE)
 
 # take a first look at the dataset
 glimpse(polar)
@@ -69,7 +69,6 @@ polar3 <- cbind(polar2, cubs_male30)
 
 # now omit all NAs in the dataset
 polar4 <- na.omit(polar3) 
-
 
 
 ### to do: 
