@@ -181,7 +181,8 @@ violin_age <- polar4 %>%
        x = "Sex", y = "Age (in years") + 
   theme(panel.background = element_rect(fill = "white"))
 
-box_skull + bar_age + bar_mass + violin_age # patchwork of these three plots
+box_skull + bar_age + bar_mass + violin_age # patchwork of these four plots
+
 ggsave(filename = "boxplot_skull.png", plot = box_skull, width = 10, height = 10)
 ggsave(filename = "barplot_age.png", plot = bar_age, width = 10, height = 10)
 ggsave(filename = "barplot_mass.png", plot = bar_mass, width = 10, height = 10)
@@ -208,7 +209,7 @@ cubs_length <- ggplot(data = polar5) +
      x = "Number of cubs", y = "Length (in cm)") + 
   theme(panel.background = element_rect(fill = "white"))
 
-cubs_age + cubs_mass + cubs_length
+cubs_age + cubs_mass + cubs_length # patchwork of the cubs plots
 
 ggsave(filename = "cubs_plots.png", plot = cubs_plots, width = 10, height = 10)
 
@@ -217,6 +218,7 @@ ggsave(filename = "cubs_plots.png", plot = cubs_plots, width = 10, height = 10)
 # H0 is stated as: Total length and Mass are not positively correlated,
 # and H1 is stated as: Total length and Mass are positively correlated
 # to test this we use the function cor.test, and specify greater as the alternative
+
 cor.test(polar4$total_length, polar4$mass, alternative = "greater")
 # the Pearson's product-moment correlation shows a p-value of less than 0.05, meaning the correlation is significant
 # the correlation value is 0.86, showing a strong positive correlation between length and mass of polarbears
@@ -239,6 +241,7 @@ scatter_hyp1 <- ggplot(data = polar4) +
 # H0 is stated as: there is no negative correlation between number of cubs and mass 
 # H1 is stated as: there is a negative correlation between number of cubs and mass
 # we again use function cor.test
+
 cor.test(polar5$cubs, polar5$mass, alternative = "less")
 # this time the Pearson's correlation gave a p-value of 0.9
 # as this is not smaller than 0.05, the test of correlation was not significant
