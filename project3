@@ -74,7 +74,7 @@ polar4 <- na.omit(polar3)
 
 # cleaning data for average number of accompanying cubs per mature female
 
-polar5 <- (polar4$cubs_male30[polar4$cubs_male30==30] <- "NA") # 30s in the cubs column are replaced with NAs
+polar4$cubs_male30[polar4$cubs_male30==30] <- "NA" # 30s in the cubs column are replaced with NAs
 
 polar5 <- polar4 %>% 
   select(bearID, cubs_male30, age, total_length, standard_length, mass, heart, skull) %>%
